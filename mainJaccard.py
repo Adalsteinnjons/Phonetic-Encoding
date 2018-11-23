@@ -39,7 +39,9 @@ print('Before the cleaning: %.2f'% trueRate(cleanedCorruptedNames,generatedNames
 
 
 jd = JaccardDistance()
-# print(jd.jaccardDistance('jakarta','jalarta'))
+# print(jd.jaccardDistance('bajindulgoblokasutaikampret','cajindulmoblocasurzikalfret'))
+
+
 
 # typoFixed = []
 # counter = 0
