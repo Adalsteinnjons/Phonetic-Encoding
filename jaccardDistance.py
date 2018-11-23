@@ -33,3 +33,20 @@ class JaccardDistance:
                         finalLastName = l
 
         return finalFirstName + " " + finalLastName
+
+    def fixTypoFirstNames(self,name,dictionary):
+        firstname, lastName = name.split(" ")
+        finalFirstName = firstname
+        finalLastName = lastName
+
+        if firstname not in dictionary:
+            for l in dictionary:
+                if abs(len(firstname)-len(l)) < 2:
+                    score = self.jaccardDistance(firstname, l,)
+                    if (score < 0.15):
+                        finalFirstName = l
+                        break
+                    if score < 0.3:
+                        finalFirstName = l
+
+        return finalFirstName + " " + finalLastName
