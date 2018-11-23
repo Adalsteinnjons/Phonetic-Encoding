@@ -1,5 +1,6 @@
 class HemmingDistance:
 
+
     def hemmingDistance(self,firstName, secondName,tol):
         totalError = 0
         lenFirstName = len(firstName)

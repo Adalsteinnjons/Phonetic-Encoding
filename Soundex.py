@@ -1,4 +1,4 @@
-correct = open("cleaningDataset/correctedNames.txt", 'w')
+correct = open("cleaningDataset/SoundexNames.txt", 'w')
 
 corrupt_txt_file = open("cleaningDataset/corruptedNames.txt", "r")
 female_txt_file = open("cleaningDataset/femaleFirstnames.txt", "r")
@@ -137,21 +137,23 @@ print("Without any optimization we have ", CorruptCounter, "idendical matches")
 print("With Soundex We have found", WholeNameMatchCounter, " identical matches")
 print("That means our PTR is ", WholeNameMatchCounter/len(generatedNames))
 
-#remove duplicates int the FN, LN list
-correctedFirstnames = removeIdenticalValues(correctedFirstnames)
-correctedLastnames = removeIdenticalValues(correctedLastnames)
-generatedFN = removeIdenticalValues(generatedFN)
-generatedLN = removeIdenticalValues(generatedLN)
 
-FNMatchCounter = findMatches(generatedFN, correctedFirstnames)
-LNMatchCounter = findMatches(generatedLN,correctedLastnames)
-
-#for the first names
-print("We have found", FNMatchCounter, " identical matches if we only look at FN")
-print("The True Positive Rate for FN is", FNMatchCounter/(len(generatedFN)))
-
-#for the last names
-print("We have found", LNMatchCounter, " identical matches if we only look at LN")
-print("The True Positive Rate for LN is", LNMatchCounter/(len(generatedLN)))
+# # To see additional info you can outcomment this section
+# #remove duplicates int the FN, LN list
+# correctedFirstnames = removeIdenticalValues(correctedFirstnames)
+# correctedLastnames = removeIdenticalValues(correctedLastnames)
+# generatedFN = removeIdenticalValues(generatedFN)
+# generatedLN = removeIdenticalValues(generatedLN)
+#
+# FNMatchCounter = findMatches(generatedFN, correctedFirstnames)
+# LNMatchCounter = findMatches(generatedLN,correctedLastnames)
+#
+# #for the first names
+# print("We have found", FNMatchCounter, " identical matches if we only look at FN")
+# print("The True Positive Rate for FN is", FNMatchCounter/(len(generatedFN)))
+#
+# #for the last names
+# print("We have found", LNMatchCounter, " identical matches if we only look at LN")
+# print("The True Positive Rate for LN is", LNMatchCounter/(len(generatedLN)))
 
 
