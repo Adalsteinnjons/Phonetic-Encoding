@@ -122,12 +122,7 @@ generatedFN, generatedLN = splitFnLnList(generatedNames)
 generatedNames = list(zip(generatedFN,generatedLN))
 
 def findMatches(list1, list2):
-    matchCounter = 0
-    for n in list1:
-        for m in list2:
-            if(n == m):
-                matchCounter += 1
-    return matchCounter
+    return len(list(set(list1)&set(list2)))
 
 WholeNameMatchCounter = findMatches(generatedNames,correctedNames)
 
