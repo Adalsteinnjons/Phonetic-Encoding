@@ -89,7 +89,9 @@ def correctNames(corruptNamesSoundex, correctNamesSoundex, correctNames, corrupt
         else:
             if corruptNamesSoundex[index] in correctNamesSoundex:
                 correctedNames[index] = correctNames[(correctNamesSoundex.index(corruptNamesSoundex[index]))]
-            else: noMatchCounter += 1
+            else:
+                correctedNames[index] = corruptNames[index]
+                noMatchCounter += 1
 
 
 
