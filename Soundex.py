@@ -80,23 +80,25 @@ lastnamesSoundex = listToSoundex(lastnames)
 # compares and checks if the encodings from the correct names and the corrupted are the same,
 # if they are the same it replaces the corrupted with the correct version.
 def correctNames(corruptNamesSoundex, correctNamesSoundex, correctNames, corruptNames):
-    correctedNames = []
+    correctedNames = [None for _ in range(len(corruptNames))]
     noMatchCounter = 0
-    for i in range(0, len(corruptNamesSoundex)):
-        for j in range(0, len(correctNamesSoundex)):
-            # to check if there is even a mistake, if the corrupt name matches a correct one we don't need soundex
-            if (corruptNames[i] == correctNames[j]):
-                correctedNames.append(correctNames[j])
-                break
-            # compares and corrects if needed
-            if (corruptNamesSoundex[i] == correctNamesSoundex[j]):
-                correctedNames.append(correctNames[j])
-                break
-            # if we don't find a match, we add "-notFound" to the name
-            if (j == (len(correctNamesSoundex) - 1)):
-                #Here we could try another encoding mechanism to improve
-                correctedNames.append(corruptNames[i] + "-notFound")
+
+    for index, entry in enumerate(corruptNames):
+        if entry in correctNames:
+            correctedNames[index] = entry
+        else:
+            if corruptNamesSoundex[index] in correctNamesSoundex:
+                correctedNames[index] = correctNames[(correctNamesSoundex.index(corruptNamesSoundex[index]))]
+            else:
+                correctedNames[index] = corruptNames[index]
                 noMatchCounter += 1
+
+
+
+
+
+    print(correctedNames)
+    print(len(correctedNames))
 
     return correctedNames, noMatchCounter
 
@@ -122,34 +124,34 @@ generatedFN, generatedLN = splitFnLnList(generatedNames)
 generatedNames = list(zip(generatedFN,generatedLN))
 
 def findMatches(list1, list2):
-    return len(list(set(list1)&set(list2)))
+    return len(list(set(list1) & set(list2)))
 
 WholeNameMatchCounter = findMatches(generatedNames,correctedNames)
 
 corruptZippednames = list(zip(corruptFirstnames,corruptLastnames))
 
 # check how many corrupt matches
-# CorruptCounter = findMatches(corruptZippednames, generatedNames)
-# print("Gamli svona mikid ", CorruptCounter)
+CorruptCounter = findMatches(corruptZippednames, generatedNames)
+print("Without any optimization we have ", CorruptCounter, "idendical matches")
 #for the whole name
-print("We have found", WholeNameMatchCounter, " identical matches")
-print("The True Positive Rate is", WholeNameMatchCounter/(len(generatedNames)))
+print("With Soundex We have found", WholeNameMatchCounter, " identical matches")
+print("That means our PTR is ", WholeNameMatchCounter/len(generatedNames))
 
 #remove duplicates int the FN, LN list
-# correctedFirstnames = removeIdenticalValues(correctedFirstnames)
-# correctedLastnames = removeIdenticalValues(correctedLastnames)
-# generatedFN = removeIdenticalValues(generatedFN)
-# generatedLN = removeIdenticalValues(generatedLN)
-#
-# FNMatchCounter = findMatches(generatedFN, correctedFirstnames)
-# LNMatchCounter = findMatches(generatedLN,correctedLastnames)
-#
-# #for the first names
-# print("We have found", FNMatchCounter, " identical matches if we only look at FN")
-# print("The True Positive Rate for FN is", FNMatchCounter/(len(generatedFN)))
-#
-# #for the last names
-# print("We have found", LNMatchCounter, " identical matches if we only look at LN")
-# print("The True Positive Rate for LN is", LNMatchCounter/(len(generatedLN)))
+correctedFirstnames = removeIdenticalValues(correctedFirstnames)
+correctedLastnames = removeIdenticalValues(correctedLastnames)
+generatedFN = removeIdenticalValues(generatedFN)
+generatedLN = removeIdenticalValues(generatedLN)
 
-print(correctedNames)
+FNMatchCounter = findMatches(generatedFN, correctedFirstnames)
+LNMatchCounter = findMatches(generatedLN,correctedLastnames)
+
+#for the first names
+print("We have found", FNMatchCounter, " identical matches if we only look at FN")
+print("The True Positive Rate for FN is", FNMatchCounter/(len(generatedFN)))
+
+#for the last names
+print("We have found", LNMatchCounter, " identical matches if we only look at LN")
+print("The True Positive Rate for LN is", LNMatchCounter/(len(generatedLN)))
+
+
