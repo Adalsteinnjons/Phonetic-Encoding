@@ -39,24 +39,24 @@ print('Before the cleaning: %.2f'% trueRate(cleanedCorruptedNames,generatedNames
 
 
 jd = JaccardDistance()
-print(jd.jaccardDistance('ada','ada'))
+# print(jd.jaccardDistance('jakarta','jalarta'))
 
-# typoFixed = []
-# counter = 0
-# for name in cleanedCorruptedNames:
-#     counter += 1
-#     if (counter%100 == 0):
-#         print(counter)
-#     typoFixed.append(jd.fixTypo(name,lastNamesDict))
-#
-#
-#
-# f = open("./preprocessed/jaccardLastNames.txt", "w+")
-# for name in typoFixed:
-#     if typoFixed[-1] == name:
-#         f.write(name)
-#     else:
-#         f.write(name + '\n')
-#
-# # typoFixed = extractWords('./preprocessed/jaccardLastNames.txt')
-# print('After cleaning the lastnames: %.2f' % trueRate(typoFixed,generatedNames), '%')
+typoFixed = []
+counter = 0
+for name in cleanedCorruptedNames:
+    counter += 1
+    if (counter%100 == 0):
+        print(counter)
+    typoFixed.append(jd.fixTypo(name,lastNamesDict))
+
+
+
+f = open("./preprocessed/jaccardLastNames.txt", "w+")
+for name in typoFixed:
+    if typoFixed[-1] == name:
+        f.write(name)
+    else:
+        f.write(name + '\n')
+
+# typoFixed = extractWords('./preprocessed/jaccardLastNames.txt')
+print('After cleaning the lastnames: %.2f' % trueRate(typoFixed,generatedNames), '%')
