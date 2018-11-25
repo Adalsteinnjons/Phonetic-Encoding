@@ -71,6 +71,7 @@ def levensthein(Correct, Corrupt):
 
 def correctNames(Corrupted, Correct):
     correctedNames = [None for _ in range(len(Corrupted))]
+    MinDistance = [None for _ in range(len(Corrupted))]
     counter = 0
     for corruptIndex, n in enumerate(Corrupted):
         minDist = 20 #some value that will never bi the min value
@@ -87,8 +88,12 @@ def correctNames(Corrupted, Correct):
                 minDist = dist
                 idx = correctIndex
 
+
             #write the corrected name in the array. Gets over written each time we find a more likely name.
             correctedNames[corruptIndex] = Correct[idx]
+            MinDistance[corruptIndex] = minDist
+            if (minDist == 0):
+                break
 
     return correctedNames
 
