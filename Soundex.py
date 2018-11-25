@@ -10,7 +10,7 @@ def txtToList(txtFile):
     list = txtFile.read().split('\n')
     return list
 
-#comment
+
 corrupt = txtToList(corrupt_txt_file)
 female = txtToList(female_txt_file)
 male = txtToList(male_txt_file)
@@ -155,5 +155,3 @@ print("That means our PTR is ", WholeNameMatchCounter/len(generatedNames))
 # #for the last names
 # print("We have found", LNMatchCounter, " identical matches if we only look at LN")
 # print("The True Positive Rate for LN is", LNMatchCounter/(len(generatedLN)))
-
-
