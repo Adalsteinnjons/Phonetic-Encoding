@@ -44,7 +44,7 @@ class HemmingDistance:
                 if (error == 1):
                     finalFirstName = f
                     break
-                if (error == 2) and len(firstName):
+                if (error == 2):
                     finalFirstName = f
 
 
