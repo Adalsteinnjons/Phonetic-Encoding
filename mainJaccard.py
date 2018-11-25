@@ -39,17 +39,15 @@ print('Before the cleaning: %.2f'% trueRate(cleanedCorruptedNames,generatedNames
 
 
 jd = JaccardDistance()
-# print(jd.jaccardDistance('bajindulgoblokasutaikampret','cajindulmoblocasurzikalfret'))
 
-
-
-# typoFixed = []
-# counter = 0
-# for name in cleanedCorruptedNames:
-#     counter += 1
-#     if (counter%100 == 0):
-#         print(counter)
-#     typoFixed.append(jd.fixTypo(name,lastNamesDict))
+typoFixed = []
+counter = 0
+# append the fixed name to typofixed array.
+for name in cleanedCorruptedNames:
+    counter += 1
+    if (counter%1000 == 0):
+        print(counter, ' names processed')
+    typoFixed.append(jd.fixTypo(name,lastNamesDict))
 #
 #
 #
@@ -60,28 +58,28 @@ jd = JaccardDistance()
 #     else:
 #         f.write(name + '\n')
 
-typoFixed = extractWords('./preprocessed/jaccardLastNames.txt')
+# typoFixed = extractWords('./preprocessed/jaccardLastNames.txt')
 typoFixed = cleanDuplicate(typoFixed)
 print('After cleaning the lastnames: %.2f' % trueRate(typoFixed,generatedNames), '%')
 
 maleFirstNamesDict.extend(femaleFirstNamesDict)
 
-# typoFixedFirstNames = []
-# counter = 0
-# for name in typoFixed:
-#     counter += 1
-#     if (counter%100 == 0):
-#         print(counter)
-#     typoFixedFirstNames.append(jd.fixTypoFirstNames(name,maleFirstNamesDict))
+typoFixedFirstNames = []
+counter = 0
+for name in typoFixed:
+    counter += 1
+    if (counter%1000 == 0):
+        print(counter, ' names processed')
+    typoFixedFirstNames.append(jd.fixTypoFirstNames(name,maleFirstNamesDict))
 #
-# f = open("./preprocessed/jaccardFirstNames.txt", "w+")
+# f = open("./preprocessed/jaccardFinal.txt", "w+")
 # for name in typoFixedFirstNames:
 #     if typoFixedFirstNames[-1] == name:
 #         f.write(name)
 #     else:
 #         f.write(name + '\n')
 
-typoFixedFirstNames = extractWords("./preprocessed/jaccardFirstNames.txt")
+# typoFixedFirstNames = extractWords("./preprocessed/jaccardFinal.txt")
 typoFixedFirstNames = cleanDuplicate(typoFixedFirstNames)
 print('After cleaning the firstnames: %.2f' % trueRate(typoFixedFirstNames,generatedNames), '%')
 

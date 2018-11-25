@@ -40,13 +40,13 @@ print('Before the cleaning: %.2f'% trueRate(cleanedCorruptedNames,generatedNames
 
 hd = HemmingDistance()
 
-# typoFixed = []
-# counter = 0
-# for name in cleanedCorruptedNames:
-#     counter += 1
-#     if (counter%100 == 0):
-#         print(counter)
-#     typoFixed.append(hd.fixTypo(name,lastNamesDict))
+typoFixed = []
+counter = 0
+for name in cleanedCorruptedNames:
+    counter += 1
+    if (counter%1000 == 0):
+        print(counter, ' names processed')
+    typoFixed.append(hd.fixTypo(name,lastNamesDict))
 #
 # f = open("./preprocessed/noTypoLastNames.txt", "w+")
 # for name in typoFixed:
@@ -55,7 +55,7 @@ hd = HemmingDistance()
 #     else:
 #         f.write(name + '\n')
 
-typoFixed = extractWords('./preprocessed/noTypoLastNames.txt')
+# typoFixed = extractWords('./preprocessed/noTypoLastNames.txt')
 typoFixed = cleanDuplicate(typoFixed)
 # print([value.split(" ") for value in typoFixed if len(value.split(" "))== 1 ])
 print('After cleaning the lastnames: %.2f' % trueRate(typoFixed,generatedNames), '%')
@@ -63,22 +63,22 @@ print('After cleaning the lastnames: %.2f' % trueRate(typoFixed,generatedNames),
 
 maleFirstNamesDict.extend(femaleFirstNamesDict)
 
-# typoFixedFirstNames = []
-# counter = 0
-# for name in typoFixed:
-#     counter += 1
-#     if (counter%100 == 0):
-#         print(counter)
-#     typoFixedFirstNames.append(hd.fixTypoFirstNames(name,maleFirstNamesDict))
+typoFixedFirstNames = []
+counter = 0
+for name in typoFixed:
+    counter += 1
+    if (counter%1000 == 0):
+        print(counter,' names processed')
+    typoFixedFirstNames.append(hd.fixTypoFirstNames(name,maleFirstNamesDict))
 #
-# f = open("./preprocessed/noTypoFirstNames.txt", "w+")
+# f = open("./preprocessed/hemmingFinal.txt", "w+")
 # for name in typoFixedFirstNames:
 #     if typoFixedFirstNames[-1] == name:
 #         f.write(name)
 #     else:
 #         f.write(name + '\n')
 
-typoFixedFirstNames = extractWords("./preprocessed/noTypoFirstNames.txt")
+# typoFixedFirstNames = extractWords("./preprocessed/hemmingFinal.txt")
 typoFixedFirstNames = cleanDuplicate(typoFixedFirstNames)
 print('After cleaning the firstnames: %.2f' % trueRate(typoFixedFirstNames,generatedNames), '%')
 print('=============================================================')

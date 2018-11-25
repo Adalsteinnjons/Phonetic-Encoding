@@ -22,7 +22,7 @@ generatedPath = './cleaningDataset/generatedNames.txt'
 generatedNames = extractWords(generatedPath)
 
 hemming = extractWords('./preprocessed/noTypoLastNames.txt')
-jaccard = extractWords('./preprocessed/jaccardFirstNames.txt')
+jaccard = extractWords('./preprocessed/jaccardFinal.txt')
 levenstein = extractWords('./cleaningDataset/LevenstheinNames.txt')
 soundex = extractWords('./cleaningDataset/SoundexNames.txt')
 

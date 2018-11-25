@@ -1,14 +1,12 @@
 
 class JaccardDistance:
 
-    def intersection(self, list1, list2):
-        list3 = list(set(list1) & set(list2))
-        return list3
-
+    # self explained, importance: we don't eliminate duplicates
     def union(self,list1,list2):
         list3 = (list1+list2)
         return list3
 
+    # create nGram string. you -> [##y,#yo,you,ou#,u##] for 3grams
     def nGrams(self,name,n):
         result = []
         for i in range(n-1):
@@ -19,6 +17,7 @@ class JaccardDistance:
             start += 1
         return result
 
+    # calculate the jaccard distance between 2 strings
     def jaccardDistance(self, name1, name2):
         nGramA = self.nGrams(name1,3)
         nGramB = self.nGrams(name2,3)
@@ -29,6 +28,9 @@ class JaccardDistance:
         c = 1-(a/b)
         return c
 
+    # used to clean lastnames using lastnames dictionary.
+    # for performance, break if jaccardDistance ist smaller than 0.5
+    # else, find the best.
     def fixTypo(self,name,lastNames):
         firstname, lastName = name.split(" ")
         finalFirstName = firstname
